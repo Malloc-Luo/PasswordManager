@@ -1,0 +1,16 @@
+<RCC>
+    <qresource prefix="/icon1">
+        <file alias="usernameBLUE">icon/username.png</file>
+        <file alias="pswdBLUE">icon/password.png</file>
+        <file alias="helpBLUE">icon/help.png</file>
+        <file alias="loginBLUE">icon/Login.png</file>
+        <file alias="closeBLACK">icon/close (1).png</file>
+        <file alias="settingBLACK">icon/setting.png</file>
+        <file alias="closeWHITE">icon/close (2).png</file>
+        <file alias="minWHITE">icon/min.png</file>
+        <file alias="settingWHITE">icon/setting (2).png</file>
+        <file alias="pswdWHITE">icon/pswdWhite.png</file>
+        <file alias="helpWHITE">icon/helpWhite.png</file>
+        <file alias="usernameWHITE">icon/UsernameWhite.png</file>
+    </qresource>
+</RCC>

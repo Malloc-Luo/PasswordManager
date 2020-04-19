@@ -2,6 +2,8 @@
 #include "ui_login.h"
 #include <QDebug>
 #include <QIcon>
+#include <QRegExp>
+#include <QValidator>
 
 Login::Login(QWidget *parent) :
     QWidget(parent),
@@ -32,8 +34,13 @@ void Login::changeEvent(QEvent *e)
 
 void Login::setWidget()
 {
-//    this->setWindowFlags(Qt::FramelessWindowHint);
-    setWindowFlags (Qt::SplashScreen);
+    this->setWindowFlags(Qt::FramelessWindowHint);
+
+    QRegExp rule("[0-9a-zA-Z]*");
+    QValidator * validator1 = new QRegExpValidator(rule, this->ui->username);
+    QValidator * validator2 = new QRegExpValidator(rule, this->ui->password);
+    this->ui->username->setValidator(validator1);
+    this->ui->password->setValidator(validator2);
     this->ui->password->raise();
     this->ui->pswdIcon->raise();
     this->ui->userIcon->raise();
@@ -43,7 +50,8 @@ void Login::setWidget()
 
     this->ui->password->installEventFilter(this);
     this->ui->username->installEventFilter(this);
-    this->ui->username->setFocus();
+    this->ui->Help->installEventFilter(this);
+    this->setFocus();
 
     //检查输入是否已经规范完成
     connect(this->ui->username, &QLineEdit::editingFinished, this, &Login::check_input_finished);
@@ -53,12 +61,10 @@ void Login::setWidget()
 
 }
 
-void Login::on_close_clicked()
-{
-    this->close();
-}
-
-
+/*
+ * 事件过滤器
+ * 处理事件[光标focus在username Linetext][光标focus在password Linetext][光标悬停在Help按钮]
+ */
 bool Login::eventFilter(QObject * watched, QEvent * event)
 {
     if (watched == this->ui->username)
@@ -88,13 +94,26 @@ bool Login::eventFilter(QObject * watched, QEvent * event)
             this->ui->pswdIcon->setIcon(QIcon(":icon1/pswdWHITE"));
         }
     }
-
+    if (watched == this->ui->Help)
+    {
+        if (event->type() == QEvent::Enter)
+        {
+            this->ui->Help->setIcon(QIcon(":icon1/helpBLUE"));
+        }
+        else if (event->type() == QEvent::Leave)
+        {
+            this->ui->Help->setIcon(QIcon(":icon1/helpWHITE"));
+        }
+    }
     return QWidget::eventFilter(watched, event);
 }
 
+/*
+ * 检查是否符合规范输入完成，若完成，使能"进入"按钮
+ */
 void Login::check_input_finished()
 {
-    if (!this->ui->username->text().isEmpty() && !this->ui->password->text().isEmpty())
+    if (!this->ui->username->text().isEmpty() && !this->ui->password->text().isEmpty() && this->ui->password->text().length() >= 6 && this->ui->username->text().length() >= 3)
     {
         this->ui->LoginInbtn->setEnabled(true);
     }
@@ -130,6 +149,15 @@ void Login::mouseReleaseEvent(QMouseEvent *event)
     this->m_press = false;
 }
 
+/*
+ *处理标题按键槽函数
+ */
+void Login::on_close_clicked()
+{
+    this->close();
+}
 
-
-
+void Login::on_setting_2_clicked()
+{
+    this->hide();
+}

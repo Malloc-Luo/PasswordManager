@@ -12,5 +12,15 @@
         <file alias="pswdWHITE">icon/pswdWhite.png</file>
         <file alias="helpWHITE">icon/helpWhite.png</file>
         <file alias="usernameWHITE">icon/UsernameWhite.png</file>
+        <file alias="title">icon/title.png</file>
+        <file alias="warningRED">icon/warningRED.png</file>
+        <file alias="spawdWHITE">icon/spswdWHITE.png</file>
+        <file alias="spswdBLUE">icon/spswdBLUE.png</file>
+        <file alias="rightGREEN">icon/rightGREEN.png</file>
+        <file alias="errorRED">icon/errorRED.png</file>
+        <file alias="nextGREEN">icon/nextGREEN.png</file>
+        <file alias="nextRED">icon/nextRED.png</file>
+        <file alias="proofBLUE">icon/proofBLUE.png</file>
+        <file alias="proofWHITE">icon/proofWHITE.png</file>
     </qresource>
 </RCC>

@@ -37,6 +37,8 @@ private slots:
 
     void check_input_finished();
 
+    void on_setting_2_clicked();
+
 private:
     QTimer * timer;
 

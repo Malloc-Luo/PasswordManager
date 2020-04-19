@@ -40,6 +40,7 @@
   </property>
   <property name="styleSheet">
    <string notr="true">background: rgb(85, 85, 127);
+border-radius:10px;
 </string>
   </property>
   <widget class="QPushButton" name="LoginInbtn">
@@ -337,7 +338,6 @@
 	border-radius:10px;
 	color:white;
 	font-size:17px;
-	box-shadow: 1px 2px 3px 4px;
 	background:qlineargradient(spread:pad, x1:0.999316, y1:0.353, x2:1, y2:0, stop:1 rgba(57, 166, 255, 255));
 }
 QPushButton:hover
@@ -395,6 +395,9 @@ QPushButton:press
      <weight>75</weight>
      <bold>true</bold>
     </font>
+   </property>
+   <property name="focusPolicy">
+    <enum>Qt::StrongFocus</enum>
    </property>
    <property name="statusTip">
     <string>输入密码</string>
@@ -454,6 +457,9 @@ QPushButton:press
    <property name="tabletTracking">
     <bool>true</bool>
    </property>
+   <property name="focusPolicy">
+    <enum>Qt::StrongFocus</enum>
+   </property>
    <property name="toolTip">
     <string>用户名</string>
    </property>
@@ -484,7 +490,7 @@ QPushButton:press
 }</string>
    </property>
    <property name="inputMethodHints">
-    <set>Qt::ImhNone</set>
+    <set>Qt::ImhPreferLowercase|Qt::ImhPreferNumbers|Qt::ImhPreferUppercase</set>
    </property>
    <property name="inputMask">
     <string/>
@@ -510,7 +516,7 @@ QPushButton:press
     <rect>
      <x>20</x>
      <y>370</y>
-     <width>93</width>
+     <width>80</width>
      <height>28</height>
     </rect>
    </property>
@@ -626,8 +632,8 @@ background-color:transparent;</string>
     <rect>
      <x>440</x>
      <y>360</y>
-     <width>51</width>
-     <height>41</height>
+     <width>35</width>
+     <height>35</height>
     </rect>
    </property>
    <property name="font">
@@ -716,6 +722,9 @@ background-color:transparent;
      <width>40</width>
      <height>40</height>
     </rect>
+   </property>
+   <property name="cursor">
+    <cursorShape>PointingHandCursor</cursorShape>
    </property>
    <property name="focusPolicy">
     <enum>Qt::NoFocus</enum>
@@ -818,6 +827,39 @@ QPushButton:hover
    <property name="icon">
     <iconset resource="icon.qrc">
      <normaloff>:/icon1/closeWHITE</normaloff>:/icon1/closeWHITE</iconset>
+   </property>
+   <property name="flat">
+    <bool>true</bool>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="pushButton">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>221</width>
+     <height>51</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">border: 0px;
+background-color:transparent;</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="icon">
+    <iconset resource="icon.qrc">
+     <normaloff>:/icon1/title</normaloff>:/icon1/title</iconset>
+   </property>
+   <property name="iconSize">
+    <size>
+     <width>220</width>
+     <height>220</height>
+    </size>
    </property>
    <property name="flat">
     <bool>true</bool>

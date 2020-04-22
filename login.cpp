@@ -46,6 +46,8 @@ void Login::setWidget()
     this->ui->userIcon->raise();
     this->ui->username->raise();
 
+    this->ui->groupBox->hide();
+
     this->ui->LoginInbtn->setEnabled(false);   //初始状态“进入”不可用
 
     this->ui->password->installEventFilter(this);
@@ -58,7 +60,6 @@ void Login::setWidget()
     connect(this->ui->password, &QLineEdit::editingFinished, this, &Login::check_input_finished);
     connect(this->ui->username, &QLineEdit::cursorPositionChanged, this, &Login::check_input_finished);
     connect(this->ui->password, &QLineEdit::cursorPositionChanged, this, &Login::check_input_finished);
-
 }
 
 /*
@@ -128,7 +129,7 @@ void Login::check_input_finished()
  */
 void Login::mouseMoveEvent(QMouseEvent *event)
 {
-    if (this->m_press)
+    if (this->m_press && this->m_pos.y() <= 40)
     {
         this->move(event->pos() - m_pos + this->pos());
     }
@@ -160,4 +161,9 @@ void Login::on_close_clicked()
 void Login::on_setting_2_clicked()
 {
     this->hide();
+}
+
+void Login::on_createUser_clicked()
+{
+    emit this->open_createuser_windows();
 }

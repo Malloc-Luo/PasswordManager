@@ -2,6 +2,8 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include "login.h"
+#include "signin.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -14,6 +16,16 @@ class MainWindow : public QMainWindow
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
+
+private:
+    Login * login;
+    Signin * signin;
+
+public:
+    void connect_slot();
+
+public slots:
+    void create_newuser();
 
 private:
     Ui::MainWindow *ui;

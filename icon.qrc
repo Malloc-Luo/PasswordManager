@@ -22,5 +22,6 @@
         <file alias="nextRED">icon/nextRED.png</file>
         <file alias="proofBLUE">icon/proofBLUE.png</file>
         <file alias="proofWHITE">icon/proofWHITE.png</file>
+        <file alias="return">icon/return.png</file>
     </qresource>
 </RCC>

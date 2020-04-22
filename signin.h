@@ -21,6 +21,13 @@ public:
 protected:
     void changeEvent(QEvent *e);
 
+    //处理窗口的移动
+    void mouseMoveEvent(QMouseEvent *event);
+
+    void mousePressEvent(QMouseEvent *event);
+
+    void mouseReleaseEvent(QMouseEvent *event);
+
 private slots:
     void on_close_clicked();
 
@@ -31,6 +38,12 @@ private slots:
     void check_tip();
 
     void on_next_clicked();
+
+    void on_return_2_clicked();
+
+private:
+    bool m_press;
+    QPoint m_pos;
 
 private:
     Ui::Signin *ui;

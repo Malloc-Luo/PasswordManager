@@ -1,6 +1,7 @@
 #include "signin.h"
 #include "ui_signin.h"
 #include <QDebug>
+#include <QMouseEvent>
 
 Signin::Signin(QWidget *parent) :
     QDialog(parent),
@@ -29,7 +30,7 @@ void Signin::changeEvent(QEvent *e)
 
 void Signin::setWidget()
 {
-    this->setFocus();
+    this->setWindowFlags(Qt::FramelessWindowHint);
 
     this->ui->groupbox2->hide();
     this->ui->horizontalLayoutWidget->hide();
@@ -47,10 +48,6 @@ void Signin::setWidget()
     this->ui->inputtips->installEventFilter(this);
     this->ui->inputanswer->installEventFilter(this);
 
-    this->ui->userhelp->installEventFilter(this);
-    this->ui->pswdhelp->installEventFilter(this);
-    this->ui->help2->installEventFilter(this);
-
     connect(this->ui->username, &QLineEdit::editingFinished, this, &Signin::check_info);
     connect(this->ui->username, &QLineEdit::cursorPositionChanged, this, &Signin::check_info);
     connect(this->ui->pswd, &QLineEdit::editingFinished, this, &Signin::check_info);
@@ -60,6 +57,8 @@ void Signin::setWidget()
     connect(this->ui->inputtips, &QLineEdit::cursorPositionChanged, this, &Signin::check_tip);
     connect(this->ui->inputanswer, &QLineEdit::editingFinished, this, &Signin::check_tip);
     connect(this->ui->inputanswer, &QLineEdit::cursorPositionChanged, this, &Signin::check_tip);
+
+    this->setFocus();
 }
 
 
@@ -132,42 +131,6 @@ bool Signin::eventFilter(QObject * watched, QEvent * event)
         }
     }
 
-    if (watched == this->ui->help2)
-    {
-        if (event->type() == QEvent::Enter)
-        {
-            this->ui->help2->setEnabled(false);
-        }
-        else if (event->type() == QEvent::Leave)
-        {
-            this->ui->help2->setEnabled(true);
-        }
-    }
-
-    if (watched == this->ui->userhelp)
-    {
-        if (event->type() == QEvent::Enter)
-        {
-            this->ui->userhelp->setEnabled(false);
-        }
-        else if (event->type() == QEvent::Leave)
-        {
-            this->ui->userhelp->setEnabled(true);
-        }
-    }
-
-    if (watched == this->ui->pswdhelp)
-    {
-        if (event->type() == QEvent::Enter)
-        {
-            this->ui->pswdhelp->setEnabled(false);
-        }
-        else if (event->type() == QEvent::Leave)
-        {
-            this->ui->pswdhelp->setEnabled(true);
-        }
-    }
-
     return QWidget::eventFilter(watched, event);
 }
 
@@ -213,11 +176,13 @@ void Signin::check_info()
     {
         this->ui->groupBox1->setGeometry(40, 170, 371, 111);
         this->ui->groupbox2->hide();
+        this->ui->pushButton->setText(tr("* 新建用户"));
     }
     else
     {
         this->ui->groupBox1->setGeometry(50, 170, 371, 111);
         this->ui->groupbox2->hide();
+        this->ui->pushButton->setText(tr("新建用户"));
     }
 
     if (this->ui->userwarning->isEnabled() && this->ui->pswdwarning->isEnabled())
@@ -251,9 +216,43 @@ void Signin::on_close_clicked()
     this->close();
 }
 
+void Signin::on_return_2_clicked()
+{
+    this->accept();
+}
+
 void Signin::on_next_clicked()
 {
     this->ui->groupBox1->setGeometry(40, 80, 371, 111);
     this->ui->groupbox2->show();
     this->ui->next->hide();
 }
+
+/*
+ * 窗口移动
+ */
+void Signin::mouseMoveEvent(QMouseEvent *event)
+{
+    //只有在标题栏才能移动
+    if (this->m_press && this->m_pos.y() <= 40)
+    {
+        this->move(event->pos() - m_pos + this->pos());
+    }
+}
+
+void Signin::mousePressEvent(QMouseEvent *event)
+{
+    if (event->button() == Qt::LeftButton)
+    {
+        this->m_press = true;
+        this->m_pos = event->pos();
+    }
+}
+
+void Signin::mouseReleaseEvent(QMouseEvent *event)
+{
+    Q_UNUSED(event);
+    this->m_press = false;
+}
+
+

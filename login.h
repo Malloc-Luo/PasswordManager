@@ -20,6 +20,9 @@ public:
 public:
     void setWidget();
 
+signals:
+    void open_createuser_windows();
+
 protected:
     void changeEvent(QEvent *e);
 
@@ -38,6 +41,8 @@ private slots:
     void check_input_finished();
 
     void on_setting_2_clicked();
+
+    void on_createUser_clicked();
 
 private:
     QTimer * timer;
